@@ -13,51 +13,58 @@
 | **Team Leader** | Boburjon Yo'ldoshboyev | `202490377` | I24C | +998 90 023 07 33 |
 | **Project Manager** | Kamalatdin Shakirov | `202490284` | I24D | +998 91 300 24 25 |
 | **Information Analyst** | Yorqinjon Isayev | `202490139` | I24C | +998 99 710 17 03 |
-| **UI/UX & Report Designer**| Zarifa Tursunova | `202490401` | I24A | +998 90 996 95 60 |
 | **AI Strategist** | Nusratxo'ja Mirzaxo'jayev | `202490199` | — | +998 91 620 20 06 |
 | **ERP Systems Expert** | Erkin Shamuratov | `202490286` | — | +998 93 824 37 17 |
 
 ---
 
 ## 3. Project Overview
-* **Project Title:** [Insert Clear, Descriptive Title — e.g., *E-Commerce Sales Optimization & Churn Forecasting*]
-* **Summary:** [1–2 sentences summarizing the core analytical focus and expected deliverables.]
+* **Project Title:** Digital Restaurant Ordering & Checkout Analytics System
+* **Summary:** An e-commerce-style food ordering platform for restaurants enabling diners to browse categorized menus, assemble dishes in a virtual cart, and complete payments. The project leverages Pandas to analyze customer ordering behavior, sales bottlenecks, and cart checkout drop-offs.
 
 ---
 
 ## 4. Dataset Specification
-* **Dataset Title:** 
-* **Source / URL:** 
-* **Description:** 
-* **Selection Justification:** 
-* **Dimensions:** `[X]` rows × `[Y]` columns
+* **Dataset Title:** Restaurant Online Ordering & Transaction Records
+* **Source / URL:** [Insert Source / Kaggle / POS Export URL]
+* **Description:** Transactional event logs recording menu items, dish categories, order timestamps, basket sizes, payment methods, and order completion statuses.
+* **Selection Justification:** Matches the multi-item retail mechanics of our digital restaurant ordering platform, providing the granularity needed for basket analysis, category margin evaluation, and order-flow bottlenecks.
+* **Dimensions:** `[X,XXX]` rows × `[YY]` columns
 
 ---
 
 ## 5. Project Objectives
-* **Core Problem Statement:** Define the central business or technical bottleneck.
+* **Core Problem Statement:** Inefficient manual ordering leads to order inaccuracies, slow table turns, and lost cross-selling opportunities during peak restaurant dining hours.
 * **Key Analytical Questions:**
-  1. 
-  2. 
-  3. 
-* **Expected Insights & Deliverables:** Target metrics and operational takeaways.
+  1. What menu categories drive the highest cart volume versus the highest profit margins?
+  2. At what stage do users abandon their meal baskets prior to payment confirmation?
+  3. Which dish pairings frequently appear together to justify bundled meal recommendations?
+  4. What peak operational hours generate the greatest transaction volume?
+* **Expected Insights & Deliverables:**
+  * Quantified checkout conversion rates and cart abandonment drivers.
+  * Identification of high-margin versus slow-moving dish items.
+  * Menu engineering recommendations to optimize digital ordering flows.
 
 ---
 
 ## 6. Data Preparation (Pandas Pipeline)
-*Systematic walkthrough of ingestion, cleaning, and preprocessing.*
-
-* **Ingestion:** Loading formats (`.csv`, `.xlsx`, `.parquet`) and handling encodings.
+* **Ingestion:** Loading raw order line-items and checkout logs into Pandas DataFrames.
 * **Cleaning Protocol:**
-  * Imputation/removal of missing records (`NaN`/`None`).
-  * Deduplication and outlier mitigation.
-  * Explicit type casting (datetime conversions, categorical encodings).
-* **Feature Engineering:** Deriving secondary metrics, ratios, and aggregated fields.
+  * Imputing missing preparation instructions or customer preferences.
+  * Standardizing item names, pricing fields, and currency types.
+  * Converting transaction strings to native `datetime` indexes.
+  * Eliminating duplicate checkout requests and test ping records.
+* **Feature Engineering:** Deriving `basket_size`, `total_order_value`, `avg_dish_price`, and `checkout_success_flag`.
 
 ```python
-# Example: Data loading and initial hygiene check
 import pandas as pd
 
-df = pd.read_csv("data/raw_dataset.csv")
-df.drop_duplicates(inplace=True)
-df.info()
+# Load dataset and clean schema
+df = pd.read_csv("data/restaurant_orders.csv")
+
+# Standardize dates and drop duplicate order records
+df["order_timestamp"] = pd.to_datetime(df["order_timestamp"])
+df.drop_duplicates(subset=["order_id", "dish_id"], inplace=True)
+
+# Derive calculated basket metrics
+df["item_subtotal"] = df["quantity"] * df["unit_price"]
