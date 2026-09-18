@@ -1,69 +1,63 @@
->> ### Project Plan : IT PM Project 1 ###<<
-1. Course Name : IT Project Management
-2. Team Information
-- Team Name: didi
-- Team Members (Name / Student ID / Role):
-  > Leader Name: Yo'ldoshboyev Boburjon, Student ID: 202490377, Group I24C, Role: Leader, Phone Number: +998900230733
-  > Member Name 1:Isayev Yorqinjon,  Student ID:202490139, Group: I24c, Role: Information Analysis, Phone Number: +998997101703
-  > Member Name 2:Tursunova Zarifa,  Student ID:202490401, Group: I24A, Role: Designer, Phone Number: +998909969560 
-  > Shakirov Kamalatdin, Student ID: 202490284, Group I24D, Role: Project Manager, Phone Number: +998913002425
-  > Mirzaxo'jayev Nusratxo'ja, Student ID: 202490199, Role: AI Strategist, Phone Number: +998916202006
-  > Shamuratov Erkin, Student ID: 202490286, Role: ERP Expert, Phone Number: +998938243717
+# IT PM Project 1: Project Plan
 
+## 1. Course Information
+* **Course Name:** IT Project Management
 
-3. Project Title : Data Analysis
-- (Provide a clear and descriptive title for your project.)
+---
 
-4. Dataset Information
-- Dataset Title:
-- Source Website / URL:
-- Description of the dataset:
-- Why this dataset was selected:
-- Size of dataset (rows, columns):
+## 2. Team Information
+* **Team Name:** `didi`
 
-5. Project Objectives
-- What problem are you trying to solve?
-- What questions do you want to answer using data analysis?
-- Expected insights from the dataset.
+| Role | Name | Student ID | Group | Contact |
+| :--- | :--- | :--- | :--- | :--- |
+| **Team Leader** | Boburjon Yo'ldoshboyev | `202490377` | I24C | +998 90 023 07 33 |
+| **Project Manager** | Kamalatdin Shakirov | `202490284` | I24D | +998 91 300 24 25 |
+| **Information Analyst** | Yorqinjon Isayev | `202490139` | I24C | +998 99 710 17 03 |
+| **UI/UX & Report Designer**| Zarifa Tursunova | `202490401` | I24A | +998 90 996 95 60 |
+| **AI Strategist** | Nusratxo'ja Mirzaxo'jayev | `202490199` | — | +998 91 620 20 06 |
+| **ERP Systems Expert** | Erkin Shamuratov | `202490286` | — | +998 93 824 37 17 |
 
-6. Data Preparation (Using Pandas)
-Describe clearly with code snippets and explanation:
-- Loading the dataset
-- Cleaning data (missing values, duplicates, data types)
-- Data transformation and feature creation
+---
 
-7. Data Analysis Tasks (Using Pandas)
-Perform meaningful analysis using Pandas operations:
-- Filtering, sorting, grouping
-- Pivot tables or aggregation
-- Answer the questions defined in the objectives section
-- Include code and explanation
+## 3. Project Overview
+* **Project Title:** [Insert Clear, Descriptive Title — e.g., *E-Commerce Sales Optimization & Churn Forecasting*]
+* **Summary:** [1–2 sentences summarizing the core analytical focus and expected deliverables.]
 
-8. Key Findings and Insights
-- What did you discover from the data?
-- Business or real-world interpretation of the results
+---
 
-9. Project Timeline (5 Weeks)
+## 4. Dataset Specification
+* **Dataset Title:** 
+* **Source / URL:** 
+* **Description:** 
+* **Selection Justification:** 
+* **Dimensions:** `[X]` rows × `[Y]` columns
 
-| Week                     |        Activities                   |
-|------------------------  |-------------------------------------|
-| Week 1(07.Sep ~ 13.Sep)  | Dataset search and project planning |
-| Week 2(14.Sep ~ 20.Sep)  | Data cleaning and preparation |
-| Week 3(21.Sep ~ 27.Sep)  |  Data analysis and visualization |
-| Week 5(28.Sep ~ 13.Oct)  | Report writing and presentation preparation |
-Presentation: 14.Oct
+---
 
-10. Outcome of the Project
-- What students learned from this project
-- Skills developed in Pandas data analysis
+## 5. Project Objectives
+* **Core Problem Statement:** Define the central business or technical bottleneck.
+* **Key Analytical Questions:**
+  1. 
+  2. 
+  3. 
+* **Expected Insights & Deliverables:** Target metrics and operational takeaways.
 
-11. Conclusion
-- Summary of the project and its importance
+---
 
-12. References
-- Dataset source
-- Tutorials, websites, or documentation used
+## 6. Data Preparation (Pandas Pipeline)
+*Systematic walkthrough of ingestion, cleaning, and preprocessing.*
 
-13. Appendix
-- Important code snippets
-- Additional charts or tables
+* **Ingestion:** Loading formats (`.csv`, `.xlsx`, `.parquet`) and handling encodings.
+* **Cleaning Protocol:**
+  * Imputation/removal of missing records (`NaN`/`None`).
+  * Deduplication and outlier mitigation.
+  * Explicit type casting (datetime conversions, categorical encodings).
+* **Feature Engineering:** Deriving secondary metrics, ratios, and aggregated fields.
+
+```python
+# Example: Data loading and initial hygiene check
+import pandas as pd
+
+df = pd.read_csv("data/raw_dataset.csv")
+df.drop_duplicates(inplace=True)
+df.info()
